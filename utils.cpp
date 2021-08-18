@@ -45,10 +45,14 @@ int useKMP(const char * sentence, const char * word) {
 
 void scanHTTPHeader(unsigned char * buf, int size) {
 
-	IpHeader* ipPacket = (IpHeader *)buf;
-    int ipHeaderLength = ipPacket->headerLength;
-    printf("IPHEADERLENGTH : %d\n", ipHeaderLength);
+	IpHeader *ipHdr = (IpHeader *)buf;
+    int ipHeaderLength = (int)(ipHdr->headerLength * 4);
 
+    TcpHeader *tcpHdr = (TcpHeader *)(buf + ipHeaderLength);
+    int tcpHeaderLength = (int)(tcpHdr->offset * 4);
+
+
+    printf("IP, TCP : %d, %d \n", ipHeaderLength, tcpHeaderLength);
 
     // char *httpPayload = (buf + ipHeaderLength + );
 
