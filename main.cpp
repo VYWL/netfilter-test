@@ -77,7 +77,11 @@ static int cb(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg,
 
 	int option = NF_ACCEPT;
 
-	if(isHostDetected) option = NF_DROP;
+	if(isHostDetected) {
+		printf(":: ACCESS DENIED :: \n");
+		printf("HOST : %s \n", hostDomain);
+		option = NF_DROP;
+	}
 
 	return nfq_set_verdict(qh, id, option, 0, NULL);
 }

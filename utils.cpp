@@ -49,6 +49,8 @@ void scanHTTPHeader(unsigned char * buf, int size) {
 	IpHeader *ipHdr = (IpHeader *)buf;
     int ipHeaderLength = (int)(ipHdr->headerLength * 4);
 
+    if(ipHdr->protocolID != 0x06) return;
+
     TcpHeader *tcpHdr = (TcpHeader *)(buf + ipHeaderLength);
     int tcpHeaderLength = (int)(tcpHdr->offset * 4);
 
