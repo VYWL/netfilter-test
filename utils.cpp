@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "packetHeaders.h"
+#include <string>
 
 int isHostDetected = 0;
 
@@ -51,10 +52,10 @@ void scanHTTPHeader(unsigned char * buf, int size) {
     TcpHeader *tcpHdr = (TcpHeader *)(buf + ipHeaderLength);
     int tcpHeaderLength = (int)(tcpHdr->offset * 4);
 
+    char *httpPayload = (char *)(buf + ipHeaderLength + tcpHeaderLength);
 
-    printf("IP, TCP : %d, %d \n", ipHeaderLength, tcpHeaderLength);
+    std::string host(hostDomain);
+    std::string keyWord = "Host: " + host;
 
-    // char *httpPayload = (buf + ipHeaderLength + );
-
-    // isHostDetected = useKMP(httpPayload, )
+    isHostDetected = useKMP(httpPayload, keyWord.c_str());
 }

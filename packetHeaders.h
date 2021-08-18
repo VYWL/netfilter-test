@@ -21,9 +21,9 @@ typedef struct tcpHeader {
     uint16_t destinationPort;
     uint32_t sequenceNumber;
     uint32_t acknowledgeNumber;
-    uint8_t offset : 4;
-    uint8_t _unused : 4;
-    uint8_t flags;
+    uint16_t _unused : 4;
+    uint16_t offset : 4;
+    uint16_t flags : 8;
     uint16_t windowSize;
     uint16_t checksum;
     uint16_t urgentPointer;
